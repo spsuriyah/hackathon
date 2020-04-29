@@ -1,0 +1,18 @@
+---
+
+- hosts: app-servers
+  connection: local
+  tasks:
+    - name: Download cloudendure agent
+      get_url: 
+          url: https://console.cloudendure.com/installer_linux.py
+          dest: /home/surya/Desktop/installer_linux.py
+          force_basic_auth: yes
+          
+    - name: Installing cloudendure agent
+      script: /home/surya/Desktop/installer_linux.py -t 05A0-9117-D9F7-AF1D-BA29-DC9A-3E75-8EB0-C5AA-0489-4A8D-F155-3CD5-4321-D929-0F38 --no-prompt
+      become: yes
+
+
+
+
