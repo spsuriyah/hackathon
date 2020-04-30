@@ -1,0 +1,18 @@
+---
+
+- hosts: localhost
+  connection: local
+  vars_files:
+    - "vars.yml"
+  tasks: 
+    - name: list ssm documents
+      command: aws ssm list-documents --region us-east-1
+      become: yes
+    - name: executing first command
+      command: aws ssm put-parameter --name Cloudendurepassword --value "{{password}}" --type String --region us-east-1
+      ignore_errors: yes      
+    - name: executing second command
+      command: aws ssm create-document --region us-east-1 --content file://ssm_document.json --name "CloudEndure-Migration-Automation" --document-type "Command"
+      ignore_errors: yes
+    - name: executing third command
+      command: aws ssm send-command --region us-east-1 --document-name "CloudEndure-Migration-Automation" --parameters Region="{{Region}}",S3Bucket="{{S3Bucket}}",CloudEndureUsername="{{CloudEndureUsername}}",CloudEndurePassword="{{CloudEndurePassword}}",ProjectName="{{ProjectName}}",ServerName="{{ServerName}}" --targets "Key=instanceids,Values=i-0719ceb678b9aa3f7"

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "2.2",
+  "description": "Command Document Example JSON Template",
+  "parameters": {
+    "Region": {
+      "type": "String",
+      "description": "Region Code"
+    },
+    "S3Bucket": {
+      "type": "String",
+      "description": "Bucket Name"
+    },
+    "CloudEndureUsername": {
+      "type": "String",
+      "description": "CloudEndure Username"
+    },
+     "CloudEndurePassword": {
+     "type": "String",
+     "description": "CloudEndure Username",
+     "default":"{{ssm:Cloudendurepassword}}"   
+    },
+    "ProjectName": {
+      "type": "String",
+      "description": "CloudEndure project Name"
+    },
+    "ServerName": {
+      "type": "String",
+      "description": "Server Name for migration"
+    }
+  },
+  "mainSteps": [
+    {
+      "action": "aws:runShellScript",
+      "name": "runPython",
+      "inputs": {
+        "runCommand": [
+          "aws s3 cp s3://{{S3Bucket}}/CloudEndure_One_Click_Migration.py . --region {{Region}}",
+          "python CloudEndure_One_Click_Migration.py -u {{CloudEndureUsername}} -p {{CloudEndurePassword}}  -j {{ProjectName}} -n {{ServerName}}"
+        ]
+      }
+    } 
+  ]
+}

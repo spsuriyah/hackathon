@@ -1,0 +1,9 @@
+---
+
+password: "Password@2020"
+Region: "us-east-1"
+S3Bucket: "migration-scripts-test"
+CloudEndureUsername: "aparna.m@powerupcloud.com"
+CloudEndurePassword: "Powerup@2020"
+ProjectName: "Migration-ec2"
+ServerName: "Migration-Server"

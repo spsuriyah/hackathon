@@ -1,0 +1,45 @@
+---
+
+- hosts: servers
+  remote_user: root
+  tasks:
+    - name: Download amazon-ssm-agent
+      get_url: 
+          url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_386/amazon-ssm-agent.deb
+          dest: /tmp/amazon-ssm-agent.deb
+          force_basic_auth: yes
+      become: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Installing ssm agent in debian
+      apt:
+        deb: /tmp/amazon-ssm-agent.deb
+      when: ansible_os_family == 'Debian'
+
+    - name: Start SSMAgent
+      service: name=amazon-ssm-agent enabled=yes state=restarted
+      become: true
+      when: ansible_os_family == 'Debian'
+
+    - name: Download SSMAgent for RedHat
+      get_url: 
+          url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+          dest: /tmp/amazon-ssm-agent.rpm
+          force_basic_auth: yes
+      become: yes
+      when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
+
+    - name: Install ssm agent in RedHat
+      yum:
+        name: http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+        state: present
+      when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
+
+    - name: Start SSMAgent
+      service: name=amazon-ssm-agent enabled=yes state=restarted
+      when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
+    
+
+
+
+
