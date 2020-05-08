@@ -15,4 +15,4 @@
       command: aws ssm create-document --region us-east-1 --content file://ssm_document.json --name "CloudEndure-Migration-Automation" --document-type "Command"
       ignore_errors: yes
     - name: executing third command
-      command: aws ssm send-command --region us-east-1 --document-name "CloudEndure-Migration-Automation" --parameters Region="{{Region}}",S3Bucket="{{S3Bucket}}",CloudEndureUsername="{{CloudEndureUsername}}",CloudEndurePassword="{{CloudEndurePassword}}",ProjectName="{{ProjectName}}",ServerName="{{ServerName}}" --targets "Key=tag:Migration,Values=yes"
+      command: aws ssm send-command --region us-east-1 --document-name "CloudEndure-Migration-Automation" --parameters Region="{{Region}}",S3Bucket="{{S3Bucket}}",CloudEndureUsername="{{CloudEndureUsername}}",CloudEndurePassword="{{CloudEndurePassword}}",ProjectName="{{ProjectName}}",Configfile="{{Configfile}}",LaunchType="{{LaunchType}}" --targets "Key=tag:Migration,Values=yes"
