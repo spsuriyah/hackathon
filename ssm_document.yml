@@ -4,7 +4,7 @@
   connection: local
   vars_files:
     - "vars.yml"
-  tasks: 
+  tasks:
     - name: list ssm documents
       command: aws ssm list-documents --region us-east-1
       become: yes
@@ -16,3 +16,4 @@
       ignore_errors: yes
     - name: executing third command
       command: aws ssm send-command --region us-east-1 --document-name "CloudEndure-Migration-Automation" --parameters Region="{{Region}}",S3Bucket="{{S3Bucket}}",CloudEndureUsername="{{CloudEndureUsername}}",CloudEndurePassword="{{CloudEndurePassword}}",ProjectName="{{ProjectName}}",Configfile="{{Configfile}}",LaunchType="{{LaunchType}}" --targets "Key=tag:Migration,Values=yes"
+
