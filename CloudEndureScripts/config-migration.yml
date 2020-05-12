@@ -1,0 +1,18 @@
+MigrationServer1:
+    machineName       : MigrationServer1
+    subnetIDs         : [subnet-c730088e]
+    securitygroupIDs  : [sg-9a7139e2]
+    instanceType      : t2.micro
+    iamRole           : None
+MigrationServer2:
+    machineName       : MigrationServer2
+    subnetIDs         : [subnet-c730088e]
+    securitygroupIDs  : [sg-9a7139e2]
+    instanceType      : t2.micro
+    iamRole           : None
+MigrationServer3:
+    machineName       : MigrationServer3
+    subnetIDs         : [subnet-c730088e]
+    securitygroupIDs  : [sg-9a7139e2]
+    instanceType      : t2.micro
+    iamRole           : None
