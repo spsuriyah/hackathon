@@ -38,8 +38,7 @@
       "name": "runPython",
       "inputs": {
         "runCommand": [
-          "aws s3 cp s3://{{S3Bucket}}/CloudEndure_One_Click_Migration.py . --region {{Region}}",
-          "aws s3 cp s3://{{S3Bucket}}/config-migration.yml . --region {{Region}}",
+          "aws s3 cp s3://{{S3Bucket}}/Cloudendurescripts/* . --region {{Region}} --recursive",
           "python CloudEndure_One_Click_Migration.py -u {{CloudEndureUsername}} -p {{CloudEndurePassword}} -l {{LaunchType}} -j {{ProjectName}} -c {{Configfile}}"
         ]
       }
