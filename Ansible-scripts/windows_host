@@ -1,0 +1,9 @@
+[windows]
+ec2-18-234-167-167.compute-1.amazonaws.com
+
+[windows:vars]
+
+ansible_user=Administrator
+ansible_password=BV6dcax23?9As;zj(rFKbv5O9m5kQ-ws
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore

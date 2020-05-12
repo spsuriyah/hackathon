@@ -1,0 +1,13 @@
+---
+
+- hosts: windows
+
+  tasks:
+    - name: Download and install SSMAgent
+      win_shell: Invoke-WebRequest https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/windows_amd64/AmazonSSMAgentSetup.exe -OutFile $env:USERPROFILE\Desktop\SSMAgent_latest.exe
+        
+    - name: Start-Process
+      win_shell: Start-Process ` -FilePath $env:USERPROFILE\Desktop\SSMAgent_latest.exe ` -ArgumentList "/S"
+    
+    - name: Remove
+      win_shell: rm -Force $env:USERPROFILE\Desktop\SSMAgent_latest.exe
